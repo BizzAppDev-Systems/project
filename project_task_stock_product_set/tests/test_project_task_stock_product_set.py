@@ -1,22 +1,23 @@
-# Copyright 2022-2023 Tecnativa - Víctor Martínez
+# Copyright 2022-2025 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+from odoo import Command
 from odoo.tests import Form
 from odoo.tests.common import users
 
-from odoo.addons.project_stock.tests.common import TestProjectStockBase
+from odoo.addons.project_task_stock.tests.common import TestProjectStockBase
 
 
-class TestProjectStockProductSet(TestProjectStockBase):
+class TestProjectTaskStockProductSet(TestProjectStockBase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.task = cls._create_task(cls, [])
+        cls.task = cls._create_task([])
         cls.product_set = cls.env["product.set"].create(
             {
                 "name": "Test product set",
                 "set_line_ids": [
-                    (0, 0, {"product_id": cls.product_a.id, "quantity": 2}),
-                    (0, 0, {"product_id": cls.product_b.id, "quantity": 1}),
+                    Command.create({"product_id": cls.product_a.id, "quantity": 2}),
+                    Command.create({"product_id": cls.product_b.id, "quantity": 1}),
                 ],
             }
         )
@@ -25,7 +26,7 @@ class TestProjectStockProductSet(TestProjectStockBase):
     def test_wizard_product_set_add_1(self):
         self.assertFalse(self.task.move_ids)
         wizard_form = Form(
-            self.env["project.stock.product.set.wizard"].with_context(
+            self.env["project.task.stock.product.set.wizard"].with_context(
                 default_task_id=self.task.id
             )
         )
@@ -50,7 +51,7 @@ class TestProjectStockProductSet(TestProjectStockBase):
         self.assertTrue(self.task.group_id)
         # Wizard to add set
         wizard_form = Form(
-            self.env["project.stock.product.set.wizard"].with_context(
+            self.env["project.task.stock.product.set.wizard"].with_context(
                 default_task_id=self.task.id
             )
         )

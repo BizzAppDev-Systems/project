@@ -1,11 +1,11 @@
-# Copyright 2022 Tecnativa - Víctor Martínez
+# Copyright 2022-2025 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 from odoo import fields, models
 
 
-class ProjectStockProductSetWizard(models.TransientModel):
+class ProjectTaskStockProductSetWizard(models.TransientModel):
     _inherit = "product.set.wizard"
-    _name = "project.stock.product.set.wizard"
+    _name = "project.task.stock.product.set.wizard"
     _description = "Wizard model to add product set into a task"
 
     task_id = fields.Many2one(
