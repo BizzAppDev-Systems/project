@@ -102,6 +102,15 @@ class TestSaleProject(TransactionCase):
 
         The line's Project and Task fields are invisible until we set a Project product.
         """
+        # There's a small incompatibility with `sale_project_copy_tasks`, since it's
+        # also adding the `project_id` field to the order_line in the SO view, but it's
+        # not setting the same invisible and column_invisible flags
+        # So, lazily try to disable this view if the module is installed during tests
+        if view := self.env.ref(
+            "sale_project_copy_tasks.view_order_form_inherit_sale_project_copy_taks",
+            raise_if_not_found=False,
+        ):
+            view.active = False
         with Form(self.order) as form:
             # Add a first order line
             with form.order_line.new() as line_form:
