@@ -33,7 +33,7 @@ class TestProjectTaskStockProductSet(TestProjectStockBase):
         wizard_form.product_set_id = self.product_set
         wizard = wizard_form.save()
         wizard.add_set()
-        self.assertTrue(self.task.group_id)
+        self.assertTrue(self.task.reference_ids)
         self.assertEqual(len(self.task.move_ids), 2)
         self.assertIn(self.product_a, self.task.move_ids.mapped("product_id"))
         self.assertIn(self.product_b, self.task.move_ids.mapped("product_id"))
@@ -48,7 +48,7 @@ class TestProjectTaskStockProductSet(TestProjectStockBase):
             move_form.product_uom_qty = 1
         task_form.save()
         self.assertEqual(len(self.task.move_ids), 1)
-        self.assertTrue(self.task.group_id)
+        self.assertTrue(self.task.reference_ids)
         # Wizard to add set
         wizard_form = Form(
             self.env["project.task.stock.product.set.wizard"].with_context(
@@ -58,7 +58,7 @@ class TestProjectTaskStockProductSet(TestProjectStockBase):
         wizard_form.product_set_id = self.product_set
         wizard = wizard_form.save()
         wizard.add_set()
-        self.assertTrue(self.task.group_id)
+        self.assertTrue(self.task.reference_ids)
         self.assertEqual(len(self.task.move_ids), 3)
         self.assertIn(self.product_a, self.task.move_ids.mapped("product_id"))
         self.assertIn(self.product_b, self.task.move_ids.mapped("product_id"))
@@ -66,8 +66,8 @@ class TestProjectTaskStockProductSet(TestProjectStockBase):
         self.task.action_confirm()
         self.assertEqual(len(self.task.move_ids), 3)
         move_a = self.task.move_ids.filtered(lambda x: x.product_id == self.product_a)
-        self.assertEqual(move_a.group_id, self.task.group_id)
+        self.assertEqual(move_a.reference_ids, self.task.reference_ids)
         move_b = self.task.move_ids.filtered(lambda x: x.product_id == self.product_b)
-        self.assertEqual(move_b.group_id, self.task.group_id)
+        self.assertEqual(move_b.reference_ids, self.task.reference_ids)
         move_c = self.task.move_ids.filtered(lambda x: x.product_id == self.product_c)
-        self.assertEqual(move_c.group_id, self.task.group_id)
+        self.assertEqual(move_c.reference_ids, self.task.reference_ids)

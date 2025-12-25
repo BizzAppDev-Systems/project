@@ -9,7 +9,6 @@ class ProductSetLine(models.Model):
     def _prepare_stock_move_values(self, task, quantity):
         self.ensure_one()
         values = {
-            "name": self.product_id.display_name,
             "product_id": self.product_id.id,
             "product_uom_qty": self.quantity * quantity,
             "product_uom": self.product_id.uom_id.id,
@@ -22,7 +21,7 @@ class ProductSetLine(models.Model):
         )
         values.update(
             stock_move_model.default_get(
-                ["group_id", "location_id", "location_dest_id", "picking_type_id"]
+                ["reference_ids", "location_id", "location_dest_id", "picking_type_id"]
             )
         )
         return values
