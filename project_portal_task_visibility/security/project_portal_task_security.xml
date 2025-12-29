@@ -4,7 +4,7 @@
         <field name="name">Project/Task: portal users: portal and following task</field>
         <field name="model_id" ref="project.model_project_task" />
         <field name="domain_force">[
-        ('project_id.privacy_visibility', '=', 'portal'),
+        ('project_id.privacy_visibility', 'in', ['invited_users', 'portal']),
         ('active', '=', True),
         ('message_partner_ids', 'child_of', [user.partner_id.commercial_partner_id.id]),
         ]</field>
