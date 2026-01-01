@@ -20,17 +20,14 @@ class ProjectTask(models.Model):
         copy=False,
     )
 
-    _sql_constraints = [
-        (
-            "project_task_unique_code",
-            "UNIQUE (company_id, code)",
-            "The code must be unique!",
-        ),
-    ]
+    _project_task_unique_code = models.Constraint(
+        "UNIQUE (company_id, code)",
+        "The code must be unique!",
+    )
 
     @property
-    def SELF_WRITABLE_FIELDS(self):
-        return super().SELF_WRITABLE_FIELDS | PROJECT_TASK_WRITABLE_FIELDS
+    def TASK_PORTAL_WRITABLE_FIELDS(self):
+        return super().TASK_PORTAL_WRITABLE_FIELDS | PROJECT_TASK_WRITABLE_FIELDS
 
     @api.model_create_multi
     def create(self, vals_list):
