@@ -47,6 +47,7 @@
                     string="Project"
                     invisible="not is_project_service_tracking_line"
                 />
+                <br />
                 <field
                     name="project_id"
                     invisible="not is_project_service_tracking_line"
@@ -63,6 +64,7 @@
                     string="Task"
                     invisible="not is_project_service_tracking_line"
                 />
+                <br />
                 <field
                     name="task_id"
                     invisible="not is_project_service_tracking_line"
