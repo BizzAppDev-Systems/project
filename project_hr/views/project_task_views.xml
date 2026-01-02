@@ -40,7 +40,7 @@
         <field name="inherit_id" ref="project.view_task_tree2" />
         <field name="arch" type="xml">
             <field name="user_ids" position="before">
-                <field name="domain_user_ids" invisible="1" />
+                <field name="domain_user_ids" column_invisible="1" />
             </field>
         </field>
     </record>
