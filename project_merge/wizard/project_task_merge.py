@@ -1,4 +1,4 @@
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 
 
 class ProjectTaskMerge(models.TransientModel):
@@ -92,9 +92,18 @@ class ProjectTaskMerge(models.TransientModel):
         :param task : the task where the message will be posted
         """
         if task.parent_id:
-            message = _(f"This project task has been moved {way} {task_names}")
+            message = self.env._(
+                "This project task has been moved %(way)s %(task_names)s",
+                way=way,
+                task_names=task_names,
+            )
         else:
-            message = _(f"This project task has been merged {way} {task_names}")
+            message = self.env._(
+                "This project task has been merged %(way)s %(task_names)s",
+                way=way,
+                task_names=task_names,
+            )
+
         task.message_post(
             body=message, message_type="comment", subtype_xmlid="mail.mt_note"
         )
