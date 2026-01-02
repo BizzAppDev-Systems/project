@@ -7,7 +7,7 @@
     "version": "18.0.1.0.0",
     "category": "Project",
     "website": "https://github.com/OCA/project",
-    "author": "C2i Change 2 improve, " "Odoo Community Association (OCA)",
+    "author": "C2i Change 2 improve, Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "depends": ["project"],
     "data": ["views/project_task.xml"],
