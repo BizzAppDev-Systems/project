@@ -3,9 +3,9 @@
 from odoo import SUPERUSER_ID, api
 
 
-def uninstall_hook(cr, registry):
+def uninstall_hook(env):
     """Restore project.project_project_manager_rule"""
-    env = api.Environment(cr, SUPERUSER_ID, {})
+    env = api.Environment(env.cr, SUPERUSER_ID, {})
     # Removing the 'group_full_project_manager' group before renaming the original
     # 'Project: Administrator' group (project.group_project_manager) to 'Administrator'
     # in order to avoid getting a SQL constraint error:
