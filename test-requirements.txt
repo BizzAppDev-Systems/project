@@ -1,0 +1,1 @@
+odoo-addon-web_timeline @ git+https://github.com/OCA/web.git@refs/pull/3401/head#subdirectory=web_timeline
